@@ -1,19 +1,20 @@
 #!/bin/sh
 
+#echo "20
+#21" > index.txt
 
-echo "24 24" > cur_protein.txt
+echo "22" > index.txt
 
-for i in  1  3 5 6 7 8 9 
+#echo "proA \n proB " > AB.txt
+
+#for i in 1 3 5 6 7 8 9
+for i in 0
 
 do
+g_mdmat_g_f -f ../PDBsGROs/md_$i.xtc -s ../PDBsGROs/nd0010.tpr -n ../PDBsGROs/index.ndx -nice -9 -mean AB_mdmat.xpm < index.txt &
 
-
-g_mdmat_g_f -f ../PDBsGROs/md_$i\_a.xtc -s ../PDBsGROs/md_$i.tpr -n ../PDBsGROs/index_$i.ndx -mean dm_AB_$i.xpm  -nice 0 -b 100000 -e 500000  < cur_protein.txt &
-
-
-#xpm2ps_g_f -f Act_ss_$i.xpm -o Act_ss_$i.eps
-#xpm2ps_g_f -f Bct_ss_$i.xpm -o Bct_ss_$i.eps
+#g_mindist_g_f -f ../PDBsGROs/md_$i.xtc -s ../PDBsGROs/md_$i.tpr -n ../PDBsGROs/index_$i.ndx -o A_B_atom-pair_$i.out -dt 1000 -printresname -od A_B_mindist_$i.xvg -on A_B_numcont_$i.xvg -or A_B_mindistres_$i.xvg < AB.txt
 
 done
 
-rm \#* protein*.txt
+rm index.txt AB.txt \#* 

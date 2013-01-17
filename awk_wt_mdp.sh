@@ -14,7 +14,7 @@ while (getline< "replica-temp.dat" > 0.5)
   
   for (i=1;i<=k;i++)
    {
-    if (i==k0) print "ref_t    =   ",$2,"    ",$2 > file;
+    if (i==k0) print "ref_t    =   ",$2,$2 > file;
     else if (i==k1) print "gen_temp            = ", $2 > file;
     else
     print aa[i] > file;

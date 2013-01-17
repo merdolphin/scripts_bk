@@ -1,10 +1,10 @@
 #!/bin/bash
-#PBS -N try
+#PBS -N nvt
 #PBS -M zhao0139@e.ntu.edu.sg
 #PBS -j oe
 #PBS -V
 
-#PBS -l nodes=2:ppn=2
+#PBS -l nodes=2:ppn=4
 
 ## pre-processing script
 cd $PBS_O_WORKDIR
@@ -21,7 +21,7 @@ export LD_LIBRARY_PATH=/usr/local/fftw/lib:/opt/intel/composerxe-2011.2.137/mkl/
 # ################################
 # commands to launch OpenMPI jobs
 # ################################
-/usr/local/mpi/intel/bin/mpirun -np $NCPUS -machinefile $PBS_NODEFILE mdrun_g_f -v -deffnm md_1 -pd -dlb yes
+/usr/local/mpi/intel/bin/mpirun -np $NCPUS -machinefile $PBS_NODEFILE mdrun_g_f -v -deffnm nvt -pd -dlb yes
 #-append -dd 0 0 0 -dlb yes
 
 # #############################
