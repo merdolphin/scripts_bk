@@ -1,0 +1,22 @@
+#!/bin/bash
+
+for i in `seq -w 1 1 16`
+
+do 
+
+more hbndx_traj$i\_Heme.ndx  | awk '{if(NF==3){print $0}}' | sed '1,8d' > $i\_index\_file
+
+more translate.pl | sed 's/A\_index\_file/'$i'\_index\_file/g' > translate_$i.pl
+
+chmod +x translate_$i.pl
+
+./translate_$i.pl > Abeta_$i
+
+more Abeta_$i  | sort -n | uniq -c | awk '{print $2,$1}' | sed 's/[A-Z]//g' > residues_$i
+
+./fill_seq.pl residues_$i > residues_filled_$i
+
+rm translate_$i.pl Abeta_$i residues_$i
+
+done
+
