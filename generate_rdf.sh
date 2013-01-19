@@ -1,57 +1,22 @@
 #!/bin/bash
+## written by lina on Sun Jan 20 00:14:33 SGT 2013
 
-echo "27
-31" > A.txt
-
-echo "28
-32" > B.txt
-
-echo "29
-33" > C.txt
-
-echo "30
-34" > D.txt
-
-echo "27
-28" > AB.txt
-
-echo "27
-29" > AC.txt
-
-echo "27
-30" > AD.txt
-
-echo "28
-29" > BC.txt
-
-echo "28
-30" > BD.txt
-
-echo "29
-30" > CD.txt
-
-echo "31
-31" > BCD.txt
-echo "32
-32" > ACD.txt
-echo "33
-33" > ABD.txt
-echo "34
-34" > ABC.txt
-
-
-#for i in AB AC AD BC BD CD
-
-#for i in A B C D
-
-for i in BCD ACD ABD ABC
+for i in `seq -w 1 1 16`
 
 do
 
-g_rdf_g_f -f ../md_a_r.xtc -s ../../md_0.tpr -n index.ndx -o rdf_$i.xvg -nice -19 -bin 0.08 < $i.txt  &
+	for j in {26..29}
+		do
+		for k in {26..29}
+		
+		do
+		if [ $j -lt $k ]; then
+		echo -e "$j\n$k" > idx$j\_$k.txt
+		a=$(($j-25))
+		b=$(($k-25))		
 
-#g_mindist_g_f -f ../md_a_r.xtc -s ../../md_0.tpr -n index.ndx -od mind_$i.xvg -on numcount_$i.xvg -o atm-pair_$i.out -dt 100 -nice -19 < $i.txt &
-
+		g_rdf -f ../../heme/16_convensionalMD/traj$i/md001.xtc -s ../../heme/16_convensionalMD/traj$i/md001.tpr -n ../../heme/16_convensionalMD/index.ndx -o rdf_$i\_heme$a\_heme$b.xvg -b 50000 -dt 1 -nice -19 < idx$j\_$k.txt & 	
+		fi
+		done
+		done
 done
-
-
