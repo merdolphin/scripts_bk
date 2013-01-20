@@ -27,6 +27,6 @@ for i in `seq -w 1 1 16`
                     printf("\n")
             }' temp_ab > temp_a
 
-past temp_b temp_a  > temp
+paste temp_b temp_a  > temp
 
 soffice -calc -o temp
