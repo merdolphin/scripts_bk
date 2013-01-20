@@ -1,0 +1,25 @@
+#!/bin/bash
+
+for i in `seq -w 1 1 16`
+
+do 
+
+#more hbndx_traj$i\_Heme.ndx  | awk '{if(NF==3){print $0}}' | sed '1,8d' > $i\_index\_file
+
+more hbndx_traj$i\_Heme.ndx | sed -n '/ hbonds_Protein-HEM/,$p' | sed '1d' > $i\_index\_file
+
+more translate.pl | sed 's/A\_index\_file/'$i'\_index\_file/g' > translate_$i.pl
+
+chmod +x translate_$i.pl
+
+./translate_$i.pl > Abeta_$i
+
+more Abeta_$i  | sort -n | uniq -c | awk '{print $2,$1}' | sed 's/[A-Z]//g' > residues_$i
+
+./fill_seq.pl residues_$i > residues_filled_$i
+
+rm translate_$i.pl Abeta_$i residues_$i
+
+done
+
+paste residues_filled_01 residues_filled_02 residues_filled_03 residues_filled_04 residues_filled_05 residues_filled_06 residues_filled_07 residues_filled_08 residues_filled_09 residues_filled_10 residues_filled_11 residues_filled_12 residues_filled_13 residues_filled_14 residues_filled_15 residues_filled_16
