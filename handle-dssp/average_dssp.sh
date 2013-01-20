@@ -2,17 +2,20 @@
 
 
 awk '
-BEGIN{a=1; b=25}
+BEGIN{sumB=0;sumA=0}
 {	c=1;
 	while(getline){
-		if(c<=25){
+		if(c<=2500){
 			c++
-			sum+=$0
+			sumB+=$1
+            sumA+=$2
 		}
-		if(c>25){
-			print sum/25
-			sum=0
+		if(c>2500){
+			printf("%.2f %.2f\n", sumB/2500,sumA/2500)
+			sumA=0
+            sumB=0
 			c=1
+            
 		}
 	}
 }' $1
