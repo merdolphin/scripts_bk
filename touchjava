@@ -1,0 +1,21 @@
+#!/bin/sh
+
+filename=$1
+
+if [ -e $filename ]; then
+	echo "WARNNING: $filename exists."
+	exit;
+fi
+
+touch $1.java 
+
+echo "class $1
+{
+	public static void main(String [] args)
+	{
+	
+	}
+}
+" >> $1.java
+
+gvim $1.java

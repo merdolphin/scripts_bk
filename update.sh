@@ -5,4 +5,4 @@ git add *
 git checkout
 git commit -am "update"
 
-git push oringin master
+git push origin master

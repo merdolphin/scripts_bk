@@ -1,0 +1,23 @@
+#!/bin/sh
+
+filename=$1
+
+if [ -e $filename ]; then
+	echo "WARNNING: $filename exists."
+	exit;
+fi
+
+touch $1 
+
+echo '#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use autodie qw(open close);
+use Carp qw(croak);
+use 5.012;
+
+' >> $1
+
+chmod +x $1
+gvim $1
