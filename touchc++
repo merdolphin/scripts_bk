@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 filename=$1
 
@@ -16,10 +16,10 @@ echo "/* $1 */
 // start: `date`
 //   end:
 
-#include <stdio.h>
+#include <iostream>
+using namespace std;
 
 int main(){
-
 
     return 0;
 }
